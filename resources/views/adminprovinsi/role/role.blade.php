@@ -34,9 +34,9 @@
                 <table id="role" class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th style="width:5%;">No</th>
-                        <th style="width:55%;">Role</th>
-                        <th style="width:40%;">Action</th>
+                        <th style="width:5%;text-align:center;">No</th>
+                        <th style="width:55%;text-align:center;">Role</th>
+                        <th style="width:40%;text-align:center;">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -58,9 +58,9 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th style="width:5%;">No</th>
-                        <th style="width:55%;">Role</th>
-                        <th style="width:40%;">Action</th>
+                        <th style="width:5%;text-align:center;">No</th>
+                        <th style="width:55%;text-align:center;">Role</th>
+                        <th style="width:40%;text-align:center;">Action</th>
                     </tr>
                     </tfoot>
                 </table>
