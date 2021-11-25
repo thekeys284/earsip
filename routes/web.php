@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('adminprovinsi/role/role');
-});
+// Route::get('/admin/role', function () {
+//     return view('adminprovinsi/role/role');
+// });
+//Route::resource('/admin/role','admin\roleController');
+Route::get('/admin/role','admin\roleController@index');
+Route::post('/admin/role/add','admin\roleController@store');
