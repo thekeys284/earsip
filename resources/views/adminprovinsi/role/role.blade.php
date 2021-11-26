@@ -39,22 +39,20 @@
                         <th style="width:40%;text-align:center;">Action</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td style="width:5%;">Trident</td>
-                        <td style="width:55%;">Internet
-                        Explorer 4.0
-                        </td>
-                        <td style="width:40%;">Win 95+</td>
-                    </tr>
-                    <tr>
-                        <td style="width:5%;">Trident</td>
-                        <td style="width:55%;">Internet
-                        Explorer 5.0
-                        </td>
-                        <td style="width:40%;">Win 95+</td>
-
-                    </tr>
+                    <tbody id='listRole'>
+                        @foreach($roles as $role)
+                          <tr id="listRole{{ $role->id }}">
+                            <td>{{$role->id}}</td>
+                            <td>{{$role->role}}</td>
+                            <td>
+                              <button type="button" id="editRole" data-id="{{ $role-id }}" class="btn btn-sm btn-warning ml-1">
+                                Edit
+                              </button>
+                              <button type="button" id="deleteRole" data-id="{{ $role-id }}" class="btn btn-sm btn-danger ml-1">
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
                     </tbody>
                     <tfoot>
                     <tr>

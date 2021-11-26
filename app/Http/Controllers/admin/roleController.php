@@ -16,7 +16,7 @@ class roleController extends Controller
      */
     public function index()
     {
-        return view('adminprovinsi.role.role');
+        return view('adminprovinsi.role.role',['roles'=>Role::orderBy('id', 'DESC')->get()]);
     }
 
     /**
