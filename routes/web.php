@@ -23,7 +23,9 @@ Route::get('/', function () {
 //Route::resource('/admin/role','admin\roleController');
 //Route::get('/admin/role',roleController::class,'index');
 Route::get('/admin/role','admin\roleController@index');
+Route::get('/admin/role/add','admin\roleController@create');
 Route::get('/test','admin\roleController@index');
+Route::get('/test/create','admin\roleController@create');
 
 
 //Route::post('/admin/role/add',roleController::class,'store'); 

@@ -74,7 +74,7 @@
 <!-- /.card -->
 
 <!-- Modal -->
-<div class="modal fade" id="tambahRole" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modal fade" id="tambahRole" tabindex="-1" role="dialog" aria-labelledby="role" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -172,12 +172,12 @@
         // }
         // Untuk modal halaman create
         function create() {
-            // $.get("{{ url('create') }}", {}, function(data, status) {
-            //     $("#exampleModalLabel").html('Create Product')
-            //     $("#page").html(data);
+            $.get("{{ url('create') }}", {}, function(data, status) {
+                $("#role").html('Create Product')
+                $("#page").html(data);
                 $("#tambahRole").modal('show');
 
-            //});
+            });
         }
 
 </script>
