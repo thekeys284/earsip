@@ -21,7 +21,7 @@
                     <h3 class="card-title"  style="position:relative;"><b>Daftar Role</b></h3>    
                 </div>
                 <div class="col-md-4 text-right">
-                    <button type="button" class="btn btn-block btn-sm btn-outline-success btn-flat" data-toggle="modal" data-target="#tambahRole">
+                    <button type="button" class="btn btn-block btn-sm btn-outline-success btn-flat" onclick="create()">
                         <b>Tambah Role</b>
                     </button> 
                 </div>
@@ -45,14 +45,17 @@
                             <td>{{$role->id}}</td>
                             <td>{{$role->role}}</td>
                             <td>
-                              <button type="button" id="editRole" data-id="{{ $role-id }}" class="btn btn-sm btn-warning ml-1">
+                               <button type="button" id="editRole" data-id="{{ $role-id }}" class="btn btn-sm btn-warning ml-1"> 
+
                                 Edit
                               </button>
-                              <button type="button" id="deleteRole" data-id="{{ $role-id }}" class="btn btn-sm btn-danger ml-1">
+                               <button type="button" id="deleteRole" data-id="{{ $role-id }}" class="btn btn-sm btn-danger ml-1"> 
+
                                 Delete
                               </button>
                             </td>
                           </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
@@ -134,7 +137,7 @@
     });
   });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $(document).ready(function(){
     $('#addRole').on('submit', function(e){
       e.preventDefault();
@@ -155,5 +158,28 @@
       });
     });
   });
+</script> -->
+
+<script>
+  $(document).ready(function() {
+            //read()
+        });
+        // Read Database
+        // function read() {
+        //     $.get("{{ url('read') }}", {}, function(data, status) {
+        //         $("#read").html(data);
+        //     });
+        // }
+        // Untuk modal halaman create
+        function create() {
+            // $.get("{{ url('create') }}", {}, function(data, status) {
+            //     $("#exampleModalLabel").html('Create Product')
+            //     $("#page").html(data);
+                $("#tambahRole").modal('show');
+
+            //});
+        }
+
 </script>
+
 @endpush

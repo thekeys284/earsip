@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+//use App\Http\Controllers\admin\roleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,5 +21,9 @@ Route::get('/', function () {
 //     return view('adminprovinsi/role/role');
 // });
 //Route::resource('/admin/role','admin\roleController');
+//Route::get('/admin/role',roleController::class,'index');
 Route::get('/admin/role','admin\roleController@index');
-Route::post('/admin/role/add','admin\roleController@store');
+Route::get('/test','admin\roleController@index');
+
+
+//Route::post('/admin/role/add',roleController::class,'store'); 

@@ -4,10 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\admin\Role;
 
-
-class roleController extends Controller
+class testController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class roleController extends Controller
      */
     public function index()
     {
-        //return view('adminprovinsi.role.role',['roles'=>Role::orderBy('id', 'DESC')->get()]);
-        return view('adminprovinsi.role.role');
-        //return('cek');
+        //
     }
 
     /**
@@ -39,11 +35,7 @@ class roleController extends Controller
      */
     public function store(Request $request)
     {
-        $role=new Role;
-
-        $role->role=$request->input('role');
-
-        $role->save();
+        //
     }
 
     /**
