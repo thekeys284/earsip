@@ -4,24 +4,23 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\admin\Role;
+use App\Model\admin\Bidang;
 
-class RoleController extends Controller
+class BidangController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function getData()
+    {
+        $p = Bidang::All();
+        return response()->json($p);
+    }
     public function index()
     {
-        $role = Role::all();
-        // return view('read')->with([
-        //     'data' => $data
-        // ]);
-        return view('adminprovinsi.role.role')->with([
-            'roles' => $role
-        ]);
+        return view('admin.bidang.index');
     }
 
     /**
@@ -31,7 +30,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('adminprovinsi.role.create');
+        
     }
 
     /**
@@ -42,8 +41,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $data['role'] = $request->role;
-        Role::insert($data);
+        Bidang::create([
+            'bidang' => $request->namaBidang,
+            'kode_bidang' => $request->kodeBidang, 
+            'email' => $request->email,
+            'alternatif_email' => $request->alternatif_email,
+        ]);
+        return response()->json('ok');
     }
 
     /**
@@ -65,7 +69,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $p = Bidang::find($id);
+        return response()->json($p);
     }
 
     /**
@@ -75,9 +80,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Bidang::whereId($request->idData)
+            ->update([
+                'bidang'  => $request->namaBidang,
+                'kode_bidang'  => $request->kodeBidang,
+                'email'  => $request->email,
+                'alternatif_email'  => $request->alternatif_email,
+            ]);
+        return response()->json('ok');
     }
 
     /**
@@ -86,8 +98,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Bidang::whereId($request->idData)->delete();
+        return response()->json('ok');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\superadmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\admin\Role;
+use App\Model\superadmin\Role;
 
 class RoleController extends Controller
 {
@@ -13,15 +13,16 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getData()
+    {
+        $role = Role::All();
+        return response()->json($role);
+    }
+    
     public function index()
     {
-        $role = Role::all();
-        // return view('read')->with([
-        //     'data' => $data
-        // ]);
-        return view('adminprovinsi.role.role')->with([
-            'roles' => $role
-        ]);
+        //$roles=Role::All();
+        return view('superadmin.role.index');;
     }
 
     /**
@@ -31,7 +32,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('adminprovinsi.role.create');
+        //return view('superadmin.role.create');
     }
 
     /**
@@ -42,8 +43,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $data['role'] = $request->role;
-        Role::insert($data);
+        Role::create([
+            'role' => $request->namaRole,
+        ]);
+        return response()->json('ok');
     }
 
     /**
@@ -65,7 +68,8 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return response()->json($role);
     }
 
     /**
@@ -75,9 +79,13 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        Role::whereId($request->idData)
+            ->update([
+                'role'  => $request->namaRole,
+            ]);
+        return response()->json('ok');
     }
 
     /**
@@ -86,8 +94,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Role::whereId($request->idData)->delete();
+        return response()->json('ok');
     }
 }

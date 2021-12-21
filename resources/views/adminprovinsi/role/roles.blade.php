@@ -21,7 +21,7 @@
                     <h3 class="card-title"  style="position:relative;"><b>Daftar Role</b></h3>    
                 </div>
                 <div class="col-md-4 text-right">
-                    <button type="button" class="btn btn-block btn-sm btn-outline-success btn-flat" onClick="create()">
+                    <button type="button" class="btn btn-block btn-sm btn-outline-success btn-flat" onclick="create()">
                         <b>Tambah Role</b>
                     </button> 
                 </div>
@@ -30,8 +30,8 @@
         <!-- /.card-header -->
         <div class="card-body">
             <div class="row">
-              <div id="table" class="col display">
-                <table id="role" class="table table-bordered table-hover display">
+              <div class="col">
+                <table id="role" class="table table-bordered table-hover">
                     <thead>
                     <tr>
                         <th style="width:5%;text-align:center;">No</th>
@@ -42,11 +42,17 @@
                     <tbody id='listRole'>
                         @foreach($roles as $role)
                           <tr id="listRole{{ $role->id }}">
-                            <td style="width:5%;text-align:center;">{{$role->id}}</td>
+                            <td>{{$role->id}}</td>
                             <td>{{$role->role}}</td>
-                            <td style="width:5%;text-align:center;">
-                                <button class="btn btn-warning" onClick="show({{ $role->id }})">Edit</button>
-                                <button class="btn btn-danger" onClick="destroy({{ $role->id }})">Delete</button>
+                            <td>
+                               <button type="button" id=""  class="btn btn-sm btn-warning ml-1"> 
+                               <!-- data-id="{{ $role-id }}" -->
+                                Edit
+                              </button>
+                               <button type="button" id="" class="btn btn-sm btn-danger ml-1"> 
+
+                                Delete
+                              </button>
                             </td>
                           </tr>
                         @endforeach
@@ -65,17 +71,42 @@
         <!-- /.card-body -->
     </div>
 </div>
+<!-- /.card -->
 
 <!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div id="page" class="p-2"></div>
+<!-- <div class="modal fade" id="tambahRole" tabindex="-1" role="dialog" aria-labelledby="role" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tambahRole">Tambah Role</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="addRole">
+        {{csrf_field()}}
+        <div class="modal-body">
+          <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-3">
+                  <label for="role">Role</label> 
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="role" placeholder="Masukkan Role">
+                </div>
+              </div>
+          </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" onclick="submit()">Tambah Role</button>
+        </div>
+      </form>
     </div>
+  </div>
 </div> -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="tambahRole" tabindex="-1" aria-labelledby="RoleLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -88,7 +119,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 @push('scripts')
 <!-- DataTables  & Plugins -->
@@ -104,9 +134,6 @@
 <script src="../assets/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="../assets/docs/assets/plugins/popper/popper.min.js"></script>
-<script src="../assets/docs/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -124,9 +151,32 @@
     });
   });
 </script>
+<!-- <script type="text/javascript">
+  $(document).ready(function(){
+    $('#addRole').on('submit', function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type:"POST",
+        url:"/admin/role/add",
+        data:$('#addRole').serialize(),
+        success: function(response){
+          console.log(response)
+          $('#tambahRole').modal('hide')
+          alert('Role sudah ditambahkan');
+        },
+        error: function(response){
+          console.log(error)
+          alert('Role gagal ditambahkan');
+        }
+      });
+    });
+  });
+</script> -->
+
 <script>
-        $(document).ready(function() {
-            read()
+  $(document).ready(function() {
+            //read()
         });
         // Read Database
         // function read() {
@@ -137,62 +187,13 @@
         // Untuk modal halaman create
         function create() {
             $.get("{{ url('admin/role/add') }}", {}, function(data, status) {
-                // $("#exampleModalLabel").html('Create Product')
+                $("#role").html('Create Product')
                 $("#page").html(data);
-                $("#exampleModal").modal('show');
+                $("#tambahRole").modal('show');
 
-            });
-        } 
-
-        // untuk proses create data
-        function store() {
-            var role = $("#role").val();
-            $.ajax({
-                type: "get",
-                url: "{{ url('admin/role/submit') }}",
-                data: "role=" + role,
-                success: function(data) {
-                    $(".btn-close").click();
-                    //read()
-                }
-            });
+            // });
         }
 
-        // Untuk modal halaman edit show
-        // function show(id) {
-        //     $.get("{{ url('show') }}/" + id, {}, function(data, status) {
-        //         $("#exampleModalLabel").html('Edit Product')
-        //         $("#page").html(data);
-        //         $("#exampleModal").modal('show');
-        //     });
-        // }
+</script>
 
-        // untuk proses update data
-        // function update(id) {
-        //     var name = $("#name").val();
-        //     $.ajax({
-        //         type: "get",
-        //         url: "{{ url('update') }}/" + id,
-        //         data: "name=" + name,
-        //         success: function(data) {
-        //             $(".btn-close").click();
-        //             read()
-        //         }
-        //     });
-        // }
-
-        // untuk delete atau destroy data
-        // function destroy(id) {
-
-        //     $.ajax({
-        //         type: "get",
-        //         url: "{{ url('destroy') }}/" + id,
-        //         data: "name=" + name,
-        //         success: function(data) {
-        //             $(".btn-close").click();
-        //             read()
-        //         }
-        //     });
-        // }
-    </script>
 @endpush
